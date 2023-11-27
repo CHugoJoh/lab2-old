@@ -21,6 +21,7 @@ public class DrawPanel extends JPanel{
     // TODO: Make this general for all cars
     void moveit(int x, int y, Car car ){
         CarDrawHelper helper = carMap.get(car);
+        helper.carPoint = new Point(x,y);
     }
 
     public void makeCars(ArrayList<Car> cars) {
@@ -75,7 +76,7 @@ public class DrawPanel extends JPanel{
         super.paintComponent(g);
         for (final Car key : this.carMap.keySet()){
             final CarDrawHelper value = this.carMap.get(key);
-            g.drawImage(value, helperX, helperY, null); // see javadoc for more info on the parameters
+            g.drawImage(value, helper.carpoint.get(x), helper.carpoint.get(y), null); // see javadoc for more info on the parameters
     }
     }
 }
