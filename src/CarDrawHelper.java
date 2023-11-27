@@ -2,9 +2,13 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class CarDrawHelper {
-    Point carPoint = new Point();
+    private BufferedImage image;
+    
+    public CarDrawHelper(BufferedImage image) {
+        this.image = image;
+    }
 
-    BufferedImage =
+    public BufferedImage getImage() { return image; }
 
-    Dictionary<Car, Image> dictImage = new Hashtable<>!();
+    public Point carPoint = new Point();
 }
