@@ -8,19 +8,20 @@ import javax.swing.*;
 import java.util.Hashtable;
 import java.util.Enumeration;
 import java.util.ArrayList;
+import java.util.Map;
 
 // This panel represent the animated part of the view with the car images.
 
 public class DrawPanel extends JPanel{
-    Dictionary<Car, CarDrawHelper> dict = new Hashtable<>();
+    Map<Car, CarDrawHelper> carMap = new Hashtable<>();
 
     // To keep track of a single cars position
     Point carPoint = new Point();
 
     // TODO: Make this general for all cars
-    void moveit(int x, int y){
-        carPoint.x = x;
-        carPoint.y = y;
+    void moveit(int x, int y, Car car ){
+        CarDrawHelper helperX = carMap.get(car);
+        CarDrawHelper helperY = carMap.get(car);
     }
 
     public void makeCars(ArrayList<Car> cars) {
@@ -56,7 +57,7 @@ public class DrawPanel extends JPanel{
                 // Ignore this will cause an exception
             }
             
-            dict.put(car, new CarDrawHelper(image, new Point((int)car.getX(), (int)car.getY()))); 
+            carMap.put(car, new CarDrawHelper(image, new Point((int)car.getX(), (int)car.getY()))); 
         }
 
     }
@@ -73,6 +74,9 @@ public class DrawPanel extends JPanel{
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(dict.get("Volovo"), volvoPoint.x, volvoPoint.y, null); // see javadoc for more info on the parameters
+        for (final Car key : this.carMap.keySet()){
+            final CarDrawHelper value = this.carMap.get(key);
+            g.drawImage(value, helperX, helperY, null); // see javadoc for more info on the parameters
+    }
     }
 }
