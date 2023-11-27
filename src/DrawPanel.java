@@ -76,7 +76,7 @@ public class DrawPanel extends JPanel{
         super.paintComponent(g);
         for (final Car key : this.carMap.keySet()){
             final CarDrawHelper value = this.carMap.get(key);
-            g.drawImage(value, helper.carpoint.get(x), helper.carpoint.get(y), null); // see javadoc for more info on the parameters
-    }
+            g.drawImage(value.getImage(), (int)value.carPoint.getX(), (int)value.carPoint.getY(), null); // see javadoc for more info on the parameters
+        }
     }
 }
