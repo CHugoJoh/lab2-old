@@ -35,7 +35,7 @@ public class Scandia extends Car implements HasRamp {
             System.out.println("Flaket måste vara nere.");
         }
         else{
-            decrementSpeed(amount);
+            currentSpeed = getCurrentSpeed() - speedFactor() * amount;
         }
     }
     public void clampDegree() {
