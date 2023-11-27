@@ -62,4 +62,10 @@ public class CarController{
             car.gas(gas);
         }
     }
+    void brake(double brake){
+        for (Car car : cars){
+            car.brake(brake);
+        }
+    }
+
 }
