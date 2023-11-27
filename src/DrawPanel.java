@@ -5,20 +5,26 @@ import java.io.IOException;
 import java.util.Dictionary;
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import java.util.Hashtable;
+import java.util.Enumeration;
 
 // This panel represent the animated part of the view with the car images.
 
 public class DrawPanel extends JPanel{
+    Dictionary<String, Integer> dict= new Hashtable<>();
+    dict.put("Volvo", 10);
+    dict.put("Saab", 10);
+    dict.put("Scania", 10);
 
     // Just a single image, TODO: Generalize
     BufferedImage volvoImage;
     // To keep track of a single cars position
-    Point volvoPoint = new Point();
+    Point carPoint = new Point();
 
     // TODO: Make this general for all cars
     void moveit(int x, int y){
-        volvoPoint.x = x;
-        volvoPoint.y = y;
+        carPoint.x = x;
+        carPoint.y = y;
     }
 
     // Initializes the panel and reads the images
@@ -60,6 +66,6 @@ public class DrawPanel extends JPanel{
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(volvoImage, volvoPoint.x, volvoPoint.y, null); // see javadoc for more info on the parameters
+        g.drawImage(dict.get("Volovo"), volvoPoint.x, volvoPoint.y, null); // see javadoc for more info on the parameters
     }
 }
