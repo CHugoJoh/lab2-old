@@ -20,8 +20,7 @@ public class DrawPanel extends JPanel{
 
     // TODO: Make this general for all cars
     void moveit(int x, int y, Car car ){
-        CarDrawHelper helperX = carMap.get(car);
-        CarDrawHelper helperY = carMap.get(car);
+        CarDrawHelper helper = carMap.get(car);
     }
 
     public void makeCars(ArrayList<Car> cars) {
