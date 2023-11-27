@@ -2,11 +2,9 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.Dictionary;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.util.Hashtable;
-import java.util.Enumeration;
 import java.util.ArrayList;
 import java.util.Map;
 
