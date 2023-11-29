@@ -132,14 +132,14 @@ public class CarView extends JFrame{
             }
         });
 
-        liftBedButton.addActionlistener(new ActionListener() {
+        liftBedButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent b) {
                 carC.liftBed();
             }
         });
 
-        lowerBedButton.addActionlistener(new ActionListener() {
+        lowerBedButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent b) {
                 carC.lowerBed();

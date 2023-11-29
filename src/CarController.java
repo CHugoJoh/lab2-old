@@ -105,8 +105,10 @@ public class CarController{
     }
 
     void turboOn(){
-        Saab95.setTurboOn();
-
+        for (Car car : cars) {
+            if (car instanceof Saab95)
+                ((Saab95)car).setTurboOn();
+        }
     }
 
     void turboOff(){
