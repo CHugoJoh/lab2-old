@@ -107,8 +107,10 @@ public class CarController{
     void turboOn(){
         Saab95.setTurboOn();
 
+    }
 
-
+    void turboOff(){
+        //Nej
     }
 
     void liftBed(){
