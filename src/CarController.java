@@ -112,13 +112,22 @@ public class CarController{
     }
 
     void turboOff(){
-        //Nej
+        for(Car car : cars) {
+            if (car instanceof Saab95)
+                ((Saab95) car).setTurboOff();
+        }
     }
 
     void liftBed(){
-
+        for(Car car : cars) {
+            if (car instanceof Scandia)
+                ((Scandia) car).raiseRamp();
+        }
     }
     void lowerBed(){
-
-    }
+        for(Car car : cars) {
+            if (car instanceof Scandia)
+                ((Scandia) car).lowerRamp();
+            }
+        }
 }
