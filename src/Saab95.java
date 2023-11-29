@@ -16,9 +16,7 @@ public class Saab95 extends TransportableCar{
         stopEngine();
     }
     
-    public void setTurboOn(){
-	    turboOn = true;
-    }
+    public void setTurboOn(){turboOn = true;}
 
     public void setTurboOff(){
 	    turboOn = false;
