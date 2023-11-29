@@ -3,6 +3,9 @@ import java.awt.*;
 public class Scandia extends Car implements HasRamp {
     private static double platformDegree = 0;
 
+    public String toString(){
+        return "Scania";
+    }
     public Scandia() {
         nrDoors = 2;
         enginePower = 200;

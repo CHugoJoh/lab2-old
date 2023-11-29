@@ -2,6 +2,10 @@ import java.awt.*;
 
 public class Saab95 extends TransportableCar{
     private boolean turboOn;
+
+    public String toString(){
+        return "Saab95";
+    }
     
     public Saab95(){
         nrDoors = 2;
