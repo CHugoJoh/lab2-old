@@ -104,6 +104,7 @@ public class CarController{
         }
     }
 
+    // This is definetly the best way to do this
     void turboOn(){
         for (Car car : cars) {
             if (car instanceof Saab95)
