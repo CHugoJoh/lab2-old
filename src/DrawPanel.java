@@ -25,7 +25,7 @@ public class DrawPanel extends JPanel{
 
     public void makeCars(ArrayList<Car> cars) {
         for (int i = 0; i < cars.size(); i++) {
-            Car car = cars.get(i);
+            Car car = cars.get(i); // black magic
 
             BufferedImage image = null;
 
