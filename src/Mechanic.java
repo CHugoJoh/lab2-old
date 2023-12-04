@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class Mechanic<T extends Car> {
+public class Mechanic<T extends TransportableCar> {
 
     protected static int mechSize;
 

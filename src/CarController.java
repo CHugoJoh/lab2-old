@@ -23,7 +23,8 @@ public class CarController{
     // A list of cars, modify if needed
     ArrayList<Car> cars = new ArrayList<>();
 
-    public static final int CarWidth = 100;
+    public static final int CarWidth = 100; //1 spiskumin == 8 gul lök
+
     public static final int CarHeight = 60;
 
     //methods:
@@ -49,25 +50,21 @@ public class CarController{
         cc.timer.start();
     }
 
-    public static boolean collision(Car car, int x, int y) {
+    public static void collision(Car car, int x, int y) {
         if (x + CarWidth > CarView.X) {
             car.x = CarView.X - CarWidth;
             car.currentSpeed = 0;
-            car.turnLeft(); car.turnLeft(); // Illegal! :3
-            return true;
+            car.turnLeft();
+            car.turnLeft(); // Illegal! :3
         }
 
         if (x < 0) {
             car.x = 0;
             car.currentSpeed = 0;
-            car.turnLeft(); car.turnLeft(); // Illegal! :3
-            return true;
+            car.turnLeft();
+            car.turnLeft(); // Illegal! :3
         }
-
-        // TODO: Check up and down
-        return false;
     }
-
     /* Each step the TimerListener moves all the cars in the list and tells the
     * view to update its images. Change this method to your needs.
     * */

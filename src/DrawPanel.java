@@ -14,10 +14,6 @@ import java.util.Objects;
 public class DrawPanel extends JPanel{
     Map<Car, CarDrawHelper> carMap = new Hashtable<>();
 
-    // To keep track of a single cars position
-    Point carPoint = new Point();
-
-    // TODO: Make this general for all cars
     void moveit(int x, int y, Car car ){
         CarDrawHelper helper = carMap.get(car);
         helper.carPoint = new Point(x,y);
@@ -35,7 +31,7 @@ public class DrawPanel extends JPanel{
                 // everything is in the same main folder.
                 // volvoImage = ImageIO.read(new File("Volvo240.jpg"));
 
-                // Rememember to rightclick src New -> Package -> name: pics -> MOVE *.jpg to pics.
+                // Remember to rightclick src New -> Package -> name: pics -> MOVE *.jpg to pics.
                 // if you are starting in IntelliJ.
                 image = ImageIO.read(Objects.requireNonNull(DrawPanel.class.getResourceAsStream("pics/" + car + ".jpg")));
             } catch (IOException ex)
