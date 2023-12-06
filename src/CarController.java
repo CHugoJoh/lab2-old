@@ -11,7 +11,10 @@ import java.util.ArrayList;
 
 public class CarController{
     // member fields:
+    public IEnumerator <Car> getCars(Car car) {
+        return cars
 
+    }
     // The delay (ms) corresponds to 20 updates a sec (hz)
     private final int delay = 50;
     // The timer is started with an listener (see below) that executes the statements
