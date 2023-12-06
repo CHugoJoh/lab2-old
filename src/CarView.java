@@ -4,6 +4,7 @@ import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 /**
  * This class represents the full view of the MVC pattern of your car simulator.
@@ -17,7 +18,7 @@ public class CarView extends JFrame{
     // The controller member
     CarController carC;
 
-    JPanel panel;
+    DrawPanel drawPanel = new DrawPanel(X, Y-240);
 
     JPanel controlPanel = new JPanel();
 
@@ -38,10 +39,9 @@ public class CarView extends JFrame{
     JButton stopButton = new JButton("Stop all cars");
 
     // Constructor
-    public CarView(String framename, CarController cc, JPanel panel){
+    public CarView(String framename, CarController cc, ArrayList<Car> cars){
         this.carC = cc;
 
-        this.panel = panel;
         initComponents(framename);
     }
 
@@ -53,7 +53,9 @@ public class CarView extends JFrame{
         this.setPreferredSize(new Dimension(X,Y));
         this.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
 
-        this.add(panel);
+        this.add(drawPanel);
+
+
 
         SpinnerModel spinnerModel =
                 new SpinnerNumberModel(0, //initial value
