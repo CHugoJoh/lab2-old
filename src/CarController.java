@@ -16,12 +16,6 @@ public class CarController{
         return cars;
     }
 
-    // The delay (ms) corresponds to 20 updates a sec (hz)
-    private final int delay = 50;
-    // The timer is started with an listener (see below) that executes the statements
-    // each step between delays.
-    Timer timer = new Timer(delay, new TimerListener());
-
     // A list of cars, modify if needed
     ArrayList<Car> cars = new ArrayList<>();
 
@@ -44,22 +38,6 @@ public class CarController{
             car.currentSpeed = 0;
             car.turnLeft();
             car.turnLeft(); // Illegal! :3
-        }
-    }
-    /* Each step the TimerListener moves all the cars in the list and tells the
-    * view to update its images. Change this method to your needs.
-    * */
-    private class TimerListener implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            for (Car car : cars) {
-                car.move();
-                int x = (int) Math.round(car.getX());
-                int y = (int) Math.round(car.getY());
-                // repaint() calls the paintComponent method of the panel
-                frame.drawPanel.repaint();
-
-                collision(car, x, y);
-            }
         }
     }
 
