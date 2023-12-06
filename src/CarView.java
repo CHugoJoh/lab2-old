@@ -44,7 +44,7 @@ public class CarView extends JFrame{
     // Constructor
     public CarView(String framename, CarController cc, ArrayList<Car> cars){
         this.carC = cc;
-        drawPanel.makeCars(cars);
+
         initComponents(framename);
     }
 
