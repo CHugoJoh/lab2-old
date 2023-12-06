@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /*
 * This class represents the Controller part in the MVC pattern.
@@ -11,10 +12,10 @@ import java.util.ArrayList;
 
 public class CarController{
     // member fields:
-    public IEnumerator <Car> getCars(Car car) {
-        return cars
-
+    public Iterable<Car> getCars(Car car) {
+        return cars;
     }
+
     // The delay (ms) corresponds to 20 updates a sec (hz)
     private final int delay = 50;
     // The timer is started with an listener (see below) that executes the statements
