@@ -32,8 +32,8 @@ public class CarController{
     //methods:
 
     public static void collision(Car car, int x, int y) {
-        if (x + CarWidth > CarView.X) {
-            car.x = CarView.X - CarWidth;
+        if (x + CarWidth > ScreenInfo.X) {
+            car.x = ScreenInfo.X - CarWidth;
             car.currentSpeed = 0;
             car.turnLeft();
             car.turnLeft(); // Illegal! :3

@@ -1,7 +1,4 @@
 public class App {
-    public static final int X = 800;
-    public static final int Y = 800;
-
     public static void main(String[] args) {
         // Instance of this class
         CarController cc = new CarController();
@@ -17,7 +14,7 @@ public class App {
         cc.cars.add(scania);
 
         // Start a new view and send a reference of self
-        DrawPanel drawPanel = new DrawPanel(X, Y-240, cc);
+        DrawPanel drawPanel = new DrawPanel(ScreenInfo.X, ScreenInfo.Y-240, cc);
 
         CarView view = new CarView("CarSim 1.0", cc, drawPanel);
 
