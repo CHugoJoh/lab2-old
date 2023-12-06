@@ -14,6 +14,7 @@ public class Scandia extends Car implements HasRamp {
         platformDegree = 0;
 
         stopEngine();
+        loadImage();
     }
 
     @Override

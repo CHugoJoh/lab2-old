@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
@@ -14,6 +15,7 @@ public abstract class Car implements Movable {
     protected double direction;
     protected double x;
     protected double y;
+    protected BufferedImage image;
 
     public double getX() { return x; }
 
@@ -84,10 +86,10 @@ public abstract class Car implements Movable {
         direction += Math.PI / 2.0;
     }
 
-    // TEMP!!
-    public void loadImage() {
-        BufferedImage image = null;
+    public BufferedImage getImage() { return image; }
 
+    // TEMP!!
+    protected void loadImage() {
         // Print an error message in case file is not found with a try/catch block
         try {
             // You can remove the "pics" part if running outside of IntelliJ and
@@ -96,7 +98,7 @@ public abstract class Car implements Movable {
 
             // Remember to rightclick src New -> Package -> name: pics -> MOVE *.jpg to pics.
             // if you are starting in IntelliJ.
-            image = ImageIO.read(Objects.requireNonNull(DrawPanel.class.getResourceAsStream("pics/" + car + ".jpg")));
+            image = ImageIO.read(Objects.requireNonNull(DrawPanel.class.getResourceAsStream("pics/" + toString() + ".jpg")));
         } catch (IOException ex)
         {
             // Ignore this will cause an exception
@@ -105,7 +107,7 @@ public abstract class Car implements Movable {
         try {
             // You can remove the "pics" part if running outside of IntelliJ and
             // everything is in the same main folder.
-            image = ImageIO.read(new File(car + ".jpg"));
+            image = ImageIO.read(new File(toString() + ".jpg"));
 
             // Rememember to rightclick src New -> Package -> name: pics -> MOVE *.jpg to pics.
             // if you are starting in IntelliJ.

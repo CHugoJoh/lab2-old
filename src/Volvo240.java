@@ -11,6 +11,7 @@ public class Volvo240 extends TransportableCar{
         enginePower = 100;
         modelName = "Volvo240";
         stopEngine();
+        loadImage();
     }
     
     @Override
