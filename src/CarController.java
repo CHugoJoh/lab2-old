@@ -12,7 +12,7 @@ import java.util.Iterator;
 
 public class CarController{
     // member fields:
-    public Iterable<Car> getCars(Car car) {
+    public Iterable<Car> getCars() {
         return cars;
     }
 
