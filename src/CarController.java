@@ -22,8 +22,6 @@ public class CarController{
     // each step between delays.
     Timer timer = new Timer(delay, new TimerListener());
 
-    // The frame that represents this instance View of the MVC pattern
-    CarView frame;
     // A list of cars, modify if needed
     ArrayList<Car> cars = new ArrayList<>();
 
@@ -57,7 +55,6 @@ public class CarController{
                 car.move();
                 int x = (int) Math.round(car.getX());
                 int y = (int) Math.round(car.getY());
-                frame.drawPanel.moveit(x, y, car);
                 // repaint() calls the paintComponent method of the panel
                 frame.drawPanel.repaint();
 
