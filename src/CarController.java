@@ -16,7 +16,7 @@ public class CarController{
     private final int delay = 50;
     // The timer is started with an listener (see below) that executes the statements
     // each step between delays.
-    private Timer timer = new Timer(delay, new TimerListener());
+    Timer timer = new Timer(delay, new TimerListener());
 
     // The frame that represents this instance View of the MVC pattern
     CarView frame;
@@ -28,27 +28,6 @@ public class CarController{
     public static final int CarHeight = 60;
 
     //methods:
-
-    public static void main(String[] args) {
-        // Instance of this class
-        CarController cc = new CarController();
-
-        cc.cars.add(new Volvo240());
-        var saab = new Saab95();
-        saab.y = 100;
-        cc.cars.add(saab);
-        var scania = new Scandia();
-        scania.y = 200;
-        cc.cars.add(scania);
-
-
-
-        // Start a new view and send a reference of self
-        cc.frame = new CarView("CarSim 1.0", cc, cc.cars);
-
-        // Start the timer
-        cc.timer.start();
-    }
 
     public static void collision(Car car, int x, int y) {
         if (x + CarWidth > CarView.X) {
