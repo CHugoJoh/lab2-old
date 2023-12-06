@@ -20,5 +20,24 @@ public class App {
 
         // Start the timer
         cc.timer.start();
+
+        // The delay (ms) corresponds to 20 updates a sec (hz)
+        private static final int delay = 50;
+        // The timer is started with an listener (see below) that executes the statements
+        // each step between delays.
+        Timer timer = new Timer(delay, new TimerListener());
+    }
+        private class TimerListener implements ActionListener {
+            public void actionPerformed(ActionEvent e) {
+                for (Car car : cars) {
+                    car.move();
+                    int x = (int) Math.round(car.getX());
+                    int y = (int) Math.round(car.getY());
+                    // repaint() calls the paintComponent method of the panel
+                    frame.drawPanel.repaint();
+
+                collision(car, x, y);
+            }
+        }
     }
 }
