@@ -16,6 +16,17 @@ public class CarController{
         return cars;
     }
 
+    public void Update(){
+        for (Car car : cars) {
+            car.move();
+            int x = (int) Math.round(car.getX());
+            int y = (int) Math.round(car.getY());
+            // repaint() calls the paintComponent method of the panel
+            frame.drawPanel.repaint();
+
+            collision(car, x, y);
+    }
+
     // A list of cars, modify if needed
     ArrayList<Car> cars = new ArrayList<>();
 
