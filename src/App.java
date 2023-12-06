@@ -4,29 +4,22 @@ import java.awt.event.ActionListener;
 import javax.swing.Timer;
 
 public class App {
+    static CarController cc = new CarController();
+    static DrawPanel drawPanel = new DrawPanel();
     // The delay (ms) corresponds to 20 updates a sec (hz)
     private static final int delay = 50;
 
-    Timer timer = new Timer(delay, new TimerListener());
+    static Timer timer = new Timer(delay, new TimerListener());
 
     private class TimerListener implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            for (Car car : cars) {
-                car.move();
-                int x = (int) Math.round(car.getX());
-                int y = (int) Math.round(car.getY());
-                // repaint() calls the paintComponent method of the panel
-                frame.drawPanel.repaint();
-
-                collision(car, x, y);
-            }
+        public void actionPerformed(){
+            cc.update();
+            drawPanel.repaint();
         }
     }
 
     public static void main(String[] args) {
         // Instance of this class
-        CarController cc = new CarController();
-
         cc.cars.add(new Volvo240());
 
         var saab = new Saab95();
