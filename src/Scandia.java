@@ -1,6 +1,6 @@
 import java.awt.*;
 
-public class Scandia extends Car implements HasRamp {
+public class Scandia extends Car {
     private static double platformDegree = 0;
 
     public String toString(){
@@ -51,7 +51,6 @@ public class Scandia extends Car implements HasRamp {
     }
 
 
-    @Override
     public void raiseRamp() {
         if (getCurrentSpeed() == 0.0) {
             platformDegree += 1;
@@ -61,7 +60,7 @@ public class Scandia extends Car implements HasRamp {
         }
     }
 
-    @Override
+
     public void lowerRamp() {
         if (getCurrentSpeed() == 0.0) {
             platformDegree -= 1;
@@ -71,7 +70,7 @@ public class Scandia extends Car implements HasRamp {
         }
     }
 
-    @Override
+
     public double getRampDegree() {
         return platformDegree;
     }
