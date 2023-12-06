@@ -1,4 +1,9 @@
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
+import java.util.Objects;
+
+import javax.imageio.ImageIO;
 
 public abstract class Car implements Movable {
     protected int nrDoors; // Number of doors on the car
@@ -77,5 +82,37 @@ public abstract class Car implements Movable {
     }
     public void turnRight(){
         direction += Math.PI / 2.0;
+    }
+
+    // TEMP!!
+    public void loadImage() {
+        BufferedImage image = null;
+
+        // Print an error message in case file is not found with a try/catch block
+        try {
+            // You can remove the "pics" part if running outside of IntelliJ and
+            // everything is in the same main folder.
+            // volvoImage = ImageIO.read(new File("Volvo240.jpg"));
+
+            // Remember to rightclick src New -> Package -> name: pics -> MOVE *.jpg to pics.
+            // if you are starting in IntelliJ.
+            image = ImageIO.read(Objects.requireNonNull(DrawPanel.class.getResourceAsStream("pics/" + car + ".jpg")));
+        } catch (IOException ex)
+        {
+            // Ignore this will cause an exception
+        }
+
+        try {
+            // You can remove the "pics" part if running outside of IntelliJ and
+            // everything is in the same main folder.
+            image = ImageIO.read(new File(car + ".jpg"));
+
+            // Rememember to rightclick src New -> Package -> name: pics -> MOVE *.jpg to pics.
+            // if you are starting in IntelliJ.
+            // volvoImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Volvo240.jpg"));
+        } catch (IOException ex)
+        {
+            // Ignore this will cause an exception
+        }
     }
 }
