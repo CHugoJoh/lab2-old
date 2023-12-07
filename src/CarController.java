@@ -166,7 +166,7 @@ public class CarController{
     }
     void addRandom(){
         Random random = new Random();
-        int high = random.nextInt(cars.size());
+        int high = random.nextInt(3);
         switch(high){
             case 0:
                 addVolvo();

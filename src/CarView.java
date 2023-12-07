@@ -52,6 +52,8 @@ public class CarView extends JFrame{
     JSpinner carPicker;
     String carPickerData = "Random";
 
+    SpinnerListModel carPickerModel;
+
     // Constructor
     public CarView(String framename, CarController cc, JPanel drawPanel){
         this.carC = cc;
@@ -59,6 +61,13 @@ public class CarView extends JFrame{
         this.drawPanel = drawPanel;
 
         initComponents(framename);
+    }
+ 
+    private void update() {
+        var nList = carC.getCarsWithsRandom();
+        carPickerModel.setList(nList);
+        carPickerData = nList.get(0);
+        carPickerModel.setValue(carPickerData);
     }
 
     // Sets everything in place and fits everything
@@ -108,7 +117,7 @@ public class CarView extends JFrame{
         adderPanel.add(addButton, 2);
         
         
-        var carPickerModel = new SpinnerListModel(carC.getCarsWithsRandom());
+        carPickerModel = new SpinnerListModel(carC.getCarsWithsRandom());
         carPicker = new JSpinner(carPickerModel);
         carPicker.addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent e) {
@@ -219,6 +228,7 @@ public class CarView extends JFrame{
         addButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 carC.addCar(makePickerData);
+                update();
             }
         });
 
@@ -226,10 +236,7 @@ public class CarView extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 carC.removeCar(carPickerData);
-                var nList = carC.getCarsWithsRandom();
-                carPickerModel.setList(nList);
-                carPickerData = nList.get(0);
-                carPickerModel.setValue(carPickerData);
+                update();
             }
         });
 
