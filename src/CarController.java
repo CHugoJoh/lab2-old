@@ -14,6 +14,28 @@ public class CarController{
 
     public int getCarAmount() { return cars.size(); }
 
+    public String getMakeFromIndex(int i) {
+        switch(i) {
+            case -1:
+                return "Random";
+            case 0:
+                return "Volvo240";
+            case 1:
+                return "Saab95";
+            case 2:
+                return "Scania";
+            default:
+                throw new IndexOutOfBoundsException("????? HOW ?????? IMPLAUSABLE");
+        }
+    }
+
+    public String getCarFromIndex(int i) {
+        if (i == -1)
+            return "Random";
+        
+        return cars.get(i).toString();
+    }
+
     public void update(){
         for (Car car : cars) {
             car.move();

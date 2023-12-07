@@ -48,9 +48,11 @@ public class CarView extends JFrame{
 
     JLabel makePickerInfo = new JLabel("Random");
     JSpinner makePicker;
+    int makePickerData = -1;
 
     JLabel carPickerInfo = new JLabel("Random");
     JSpinner carPicker;
+    int carPickerData = -1;
 
     // Constructor
     public CarView(String framename, CarController cc, JPanel drawPanel){
@@ -98,6 +100,13 @@ public class CarView extends JFrame{
 
         var makePickerModel = new SpinnerNumberModel(-1, -1, 2, 1);
         makePicker = new JSpinner(makePickerModel);
+        makePicker.addChangeListener(new ChangeListener() {
+            public void stateChanged(ChangeEvent e) {
+                makePickerData = (int) ((JSpinner)e.getSource()).getValue();
+                makePickerInfo.setText(carC.getMakeFromIndex(makePickerData));
+            }
+        });
+
         adderPanel.add(makePicker, 1);
         adderPanel.add(makePickerInfo, 2);
         adderPanel.add(addButton, 3);
@@ -105,6 +114,13 @@ public class CarView extends JFrame{
         
         var carPickerModel = new SpinnerNumberModel(-1, -1, carC.getCarAmount() - 1, 1);
         carPicker = new JSpinner(carPickerModel);
+        carPicker.addChangeListener(new ChangeListener() {
+            public void stateChanged(ChangeEvent e) {
+                carPickerData = (int) ((JSpinner)e.getSource()).getValue();
+                carPickerInfo.setText(carC.getMakeFromIndex(carPickerData));
+            }
+        });
+
         adderPanel.add(carPicker, 4);
         adderPanel.add(carPickerInfo, 5);
         adderPanel.add(removeButton, 6);
