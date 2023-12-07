@@ -144,10 +144,15 @@ public class CarController{
         arrange();
     }
     void removeCar(String make){
+        if (cars.size() == 0)
+            return;
+
         if (make == "Random") {
             Random random = new Random();
             cars.remove(random.nextInt(cars.size()));
         }
+
+        cars.remove(Character.getNumericValue(make.charAt(1)));
 
         arrange();
     }
@@ -180,9 +185,10 @@ public class CarController{
         }
     }
     
-    void arrange() {
+    public void arrange() {
         for (int i = 0; i < cars.size(); i++) {
-            cars.get(i).setY(i * 100);
+            cars.get(i).setY((i % 5) * 100);
+            cars.get(i).setX((i / 5) * 300);
         }
     }
 }
