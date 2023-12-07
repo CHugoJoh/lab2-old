@@ -126,13 +126,13 @@ public class CarController{
     void addCar(String make){
         switch(make){
             case "Random":
-                break;
+                addRandom();
             case "Volvo240":
-                break;
+                addVolvo();
             case "Saab95":
-                break;
+                addSaab();
             case "Scania":
-                break;
+                addScania();
 
         }
 
@@ -142,7 +142,32 @@ public class CarController{
             Random random = new Random();
             cars.remove(random.nextInt(cars.size()));
         }
-
     }
+    
+    void addVolvo(){
+        Car Volvo240 = new Volvo240();
+        cars.add(Volvo240);
+    }
+    void addSaab(){
+        Car Saab95 = new Saab95();
+        cars.add(Saab95);
+    }
+    void addScania() {
+        Car Scania = new Scandia();
+        cars.add(Scania);
+    }
+    void addRandom(){
+        Random random = new Random();
+        int high = random.nextInt(cars.size());
+        switch(high){
+            case 1:
+                addVolvo();
+            case 2:
+                addSaab();
+            case 3:
+                addScania();
+        }
+    }
+    
 
 }
