@@ -46,13 +46,11 @@ public class CarView extends JFrame{
     JButton addButton = new JButton("Add");
     JButton removeButton = new JButton("Remove");
 
-    JLabel makePickerInfo = new JLabel("Random");
     JSpinner makePicker;
-    int makePickerData = -1;
+    String makePickerData = "Random";
 
-    JLabel carPickerInfo = new JLabel("Random");
     JSpinner carPicker;
-    int carPickerData = -1;
+    String carPickerData = "Random";
 
     // Constructor
     public CarView(String framename, CarController cc, JPanel drawPanel){
@@ -86,7 +84,7 @@ public class CarView extends JFrame{
             }
         });
 
-        adderPanel.setLayout(new GridLayout(7, 0, 0, 0));
+        adderPanel.setLayout(new GridLayout(5, 0, 0, 8));
         adderPanel.setCursor(new Cursor(Cursor.MOVE_CURSOR));
         adderPanel.setBorder(new EmptyBorder(0, 10, 0, 10));
         var addRemoveCarsLabel = new JLabel("Add/Remove cars");
@@ -98,32 +96,28 @@ public class CarView extends JFrame{
 
         
 
-        var makePickerModel = new SpinnerNumberModel(-1, -1, 2, 1);
+        var makePickerModel = new SpinnerListModel(carC.getMakes());
         makePicker = new JSpinner(makePickerModel);
         makePicker.addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent e) {
-                makePickerData = (int) ((JSpinner)e.getSource()).getValue();
-                makePickerInfo.setText(carC.getMakeFromIndex(makePickerData));
+                makePickerData = (String) ((JSpinner)e.getSource()).getValue();
             }
         });
 
         adderPanel.add(makePicker, 1);
-        adderPanel.add(makePickerInfo, 2);
-        adderPanel.add(addButton, 3);
+        adderPanel.add(addButton, 2);
         
         
-        var carPickerModel = new SpinnerNumberModel(-1, -1, carC.getCarAmount() - 1, 1);
+        var carPickerModel = new SpinnerListModel(carC.getCarsWithsRandom());
         carPicker = new JSpinner(carPickerModel);
         carPicker.addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent e) {
-                carPickerData = (int) ((JSpinner)e.getSource()).getValue();
-                carPickerInfo.setText(carC.getMakeFromIndex(carPickerData));
+                carPickerData = (String) ((JSpinner)e.getSource()).getValue();
             }
         });
 
-        adderPanel.add(carPicker, 4);
-        adderPanel.add(carPickerInfo, 5);
-        adderPanel.add(removeButton, 6);
+        adderPanel.add(carPicker, 3);
+        adderPanel.add(removeButton, 4);
 
         
         this.add(adderPanel);

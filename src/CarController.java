@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.List;
 
 /*
 * This class represents the Controller part in the MVC pattern.
@@ -14,26 +15,23 @@ public class CarController{
 
     public int getCarAmount() { return cars.size(); }
 
-    public String getMakeFromIndex(int i) {
-        switch(i) {
-            case -1:
-                return "Random";
-            case 0:
-                return "Volvo240";
-            case 1:
-                return "Saab95";
-            case 2:
-                return "Scania";
-            default:
-                throw new IndexOutOfBoundsException("????? HOW ?????? IMPLAUSABLE");
-        }
+    public List<String> getMakes() {
+        List<String> list = new ArrayList<String>(); 
+        list.add("Random");
+        list.add("Volvo240");
+        list.add("Saab95");
+        list.add("Scania");
+        return list;
     }
 
-    public String getCarFromIndex(int i) {
-        if (i == -1)
-            return "Random";
-        
-        return cars.get(i).toString();
+    public List<String> getCarsWithsRandom() {
+        List<String> list = new ArrayList<String>();
+        list.add("Random");
+        for (int i = 0; i < cars.size(); i++) {
+            list.add("[" + i + "] " + cars.get(i).toString());
+        }
+
+        return list;
     }
 
     public void update(){
