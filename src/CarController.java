@@ -12,6 +12,8 @@ public class CarController{
         return cars;
     }
 
+    public int getCarAmount() { return cars.size(); }
+
     public void update(){
         for (Car car : cars) {
             car.move();
