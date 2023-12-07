@@ -142,16 +142,22 @@ public class CarView extends JFrame{
         controlPanel.setBackground(Color.CYAN);
 
 
+
+        JPanel startStopPanel = new JPanel();
+        startStopPanel.setLayout(new BorderLayout());
+        
         startButton.setBackground(Color.blue);
         startButton.setForeground(Color.green);
-        startButton.setPreferredSize(new Dimension(ScreenInfo.X/5-15,200));
-        this.add(startButton);
+        startButton.setPreferredSize(new Dimension(ScreenInfo.X/5-15,100));
+        startStopPanel.add(startButton, BorderLayout.PAGE_START);
 
 
         stopButton.setBackground(Color.red);
         stopButton.setForeground(Color.black);
-        stopButton.setPreferredSize(new Dimension(ScreenInfo.X/5-15,200));
-        this.add(stopButton);
+        stopButton.setPreferredSize(new Dimension(ScreenInfo.X/5-15,100));
+        startStopPanel.add(stopButton, BorderLayout.PAGE_END);
+
+        this.add(startStopPanel);
 
         // This actionListener is for the gas button only
         gasButton.addActionListener(new ActionListener() {
@@ -210,16 +216,20 @@ public class CarView extends JFrame{
             }
         });
 
-        addButton.addChangeListener(new ChangeListener() {
-            public void stateChanged(ChangeEvent e) {
-                carC.addCar(carPickerData);
+        addButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                carC.addCar(makePickerData);
             }
         });
 
-        removeButton.addChangeListener(new ChangeListener() {
+        removeButton.addActionListener(new ActionListener() {
             @Override
-            public void stateChanged(ChangeEvent e) {
+            public void actionPerformed(ActionEvent e) {
                 carC.removeCar(carPickerData);
+                var nList = carC.getCarsWithsRandom();
+                carPickerModel.setList(nList);
+                carPickerData = nList.get(0);
+                carPickerModel.setValue(carPickerData);
             }
         });
 

@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /*
 * This class represents the Controller part in the MVC pattern.
@@ -137,16 +138,9 @@ public class CarController{
 
     }
     void removeCar(String make){
-        switch(make){
-            case "Random":
-                break;
-            case "Volvo240":
-                break;
-            case "Saab95":
-                break;
-            case "Scania":
-                break;
-
+        if (make == "Random") {
+            Random random = new Random();
+            cars.remove(random.nextInt() % cars.size());
         }
 
     }
