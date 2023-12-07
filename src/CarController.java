@@ -140,7 +140,7 @@ public class CarController{
     void removeCar(String make){
         if (make == "Random") {
             Random random = new Random();
-            cars.remove(random.nextInt() % cars.size());
+            cars.remove(random.nextInt(cars.size()));
         }
 
     }
