@@ -128,4 +128,15 @@ public class CarController{
                 ((Scandia) car).lowerRamp();
             }
         }
+    void startCars(){
+        for(Car car : cars) {
+            car.startEngine();
+        }
+    }
+    void stopCars(){
+        for(Car car : cars) {
+            car.stopEngine();
+        }
+    }
+
 }
