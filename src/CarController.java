@@ -124,6 +124,7 @@ public class CarController{
         }
     }
     void addCar(String make){
+        if(cars.size() < 10){
         switch(make){
             case "Random":
                 addRandom();
@@ -139,8 +140,7 @@ public class CarController{
                 break;
             default:
                 break;
-        }
-
+        }}
         arrange();
     }
     void removeCar(String make){
