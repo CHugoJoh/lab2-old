@@ -21,6 +21,9 @@ public abstract class Car implements Movable {
 
     public double getY() { return y; }
 
+    // This is needed for arrange in CarController
+    public void setY(double y) { this.y = y; }
+
     public int getNrDoors(){
         return nrDoors;
     }
