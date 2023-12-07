@@ -210,6 +210,21 @@ public class CarView extends JFrame{
             }
         });
 
+        addButton.addChangeListener(new ChangeListener() {
+            public void stateChanged(ChangeEvent e) {
+                carC.addCar(carPickerData);
+            }
+        });
+
+        removeButton.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                carC.removeCar(carPickerData);
+            }
+        });
+
+
+
         // Make the frame pack all it's components by respecting the sizes if possible.
         this.pack();
 

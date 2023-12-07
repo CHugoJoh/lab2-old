@@ -122,6 +122,33 @@ public class CarController{
             car.stopEngine();
         }
     }
+    void addCar(String make){
+        switch(make){
+            case "Random":
+                break;
+            case "Volvo240":
+                break;
+            case "Saab95":
+                break;
+            case "Scania":
+                break;
 
+        }
+
+    }
+    void removeCar(String make){
+        switch(make){
+            case "Random":
+                break;
+            case "Volvo240":
+                break;
+            case "Saab95":
+                break;
+            case "Scania":
+                break;
+
+        }
+
+    }
 
 }
