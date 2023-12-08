@@ -16,7 +16,7 @@ public class CarModel {
 
     public int getCarAmount() { return cars.size(); }
 
-    public List<String> getMakes() {
+        public List<String> getMakes() {
         List<String> list = new ArrayList<String>(); 
         list.add("Random");
         list.add("Volvo240");
@@ -87,6 +87,7 @@ public class CarModel {
     }
 
     // This is definetly the best way to do this
+    //håller med
     void turboOn(){
         for (Car car : cars) {
             if (car instanceof Saab95)
