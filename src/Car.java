@@ -102,7 +102,7 @@ public abstract class Car implements Movable {
 
             // Remember to rightclick src New -> Package -> name: pics -> MOVE *.jpg to pics.
             // if you are starting in IntelliJ.
-            image = ImageIO.read(Objects.requireNonNull(DrawPanel.class.getResourceAsStream("pics/" + toString() + ".jpg")));
+            image = ImageIO.read(Objects.requireNonNull(CarView.class.getResourceAsStream("pics/" + toString() + ".jpg")));
         } catch (IOException ex)
         {
             // Ignore this will cause an exception

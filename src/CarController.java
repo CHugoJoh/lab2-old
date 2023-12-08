@@ -1,194 +1,256 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.font.TextAttribute;
+import java.util.HashMap;
+import java.util.Map;
 
-/*
-* This class represents the Controller part in the MVC pattern.
-* It's responsibilities is to listen to the View and responds in a appropriate manner by
-* modifying the model state and the updating the view.
- */
+/**
+ * This class represents the full view of the MVC pattern of your car simulator.
+ * It initializes with being center on the screen and attaching it's controller in it's state.
+ * It communicates with the Controller by calling methods of it when an action fires of in
+ * each of it's components.
+ * TODO: Write more actionListeners and wire the rest of the buttons
+ **/
 
-public class CarController{
-    // member fields:
-    public Iterable<Car> getCars() {
-        return cars;
+public class CarController extends JFrame{
+    // The controller member
+    CarModel carM;
+
+    JPanel drawPanel;
+
+    JPanel controlPanel = new JPanel();
+
+    JPanel gasPanel = new JPanel();
+    JSpinner gasSpinner = new JSpinner();
+    int gasAmount = 0;
+    int brakeAmount = 0;
+    JLabel gasLabel = new JLabel("Amount of gas");
+
+    JButton gasButton = new JButton("Gas");
+    JButton brakeButton = new JButton("Brake");
+    JButton turboOnButton = new JButton("Saab Turbo on");
+    JButton turboOffButton = new JButton("Saab Turbo off");
+    JButton liftBedButton = new JButton("Scania Lift Bed");
+    JButton lowerBedButton = new JButton("Lower Lift Bed");
+
+    JButton startButton = new JButton("Start all cars");
+    JButton stopButton = new JButton("Stop all cars");
+
+    JPanel adderPanel = new JPanel();
+    JButton addButton = new JButton("Add");
+    JButton removeButton = new JButton("Remove");
+
+    JSpinner makePicker;
+    String makePickerData = "Random";
+
+    JSpinner carPicker;
+    String carPickerData = "Random";
+
+    SpinnerListModel carPickerModel;
+
+    // Constructor
+    public CarController(String framename, CarModel carModel, JPanel drawPanel){
+        this.carM = carModel;
+
+        this.drawPanel = drawPanel;
+
+        initComponents(framename);
+    }
+ 
+    private void update() {
+        var nList = carM.getCarsWithsRandom();
+        carPickerModel.setList(nList);
+        carPickerData = nList.get(0);
+        carPickerModel.setValue(carPickerData);
     }
 
-    public int getCarAmount() { return cars.size(); }
-
-    public List<String> getMakes() {
-        List<String> list = new ArrayList<String>(); 
-        list.add("Random");
-        list.add("Volvo240");
-        list.add("Saab95");
-        list.add("Scania");
-        return list;
-    }
-
-    public List<String> getCarsWithsRandom() {
-        List<String> list = new ArrayList<String>();
-        list.add("Random");
-        for (int i = 0; i < cars.size(); i++) {
-            list.add("[" + i + "] " + cars.get(i).toString());
-        }
-
-        return list;
-    }
-
-    public void update(){
-        for (Car car : cars) {
-            car.move();
-            int x = (int) Math.round(car.getX());
-            int y = (int) Math.round(car.getY());
-
-            collision(car, x, y);
-        }
-    }
-
-    // A list of cars, modify if needed
-    ArrayList<Car> cars = new ArrayList<>();
-
-    public static final int CarWidth = 100; //1 spiskumin == 8 gul lök
-
-    public static final int CarHeight = 60;
-
-    //methods:
-
-    public static void collision(Car car, int x, int y) {
-        if (x + CarWidth > ScreenInfo.X) {
-            car.x = ScreenInfo.X - CarWidth;
-            car.currentSpeed = 0;
-            car.turnLeft();
-            car.turnLeft(); // Illegal! :3
-        }
-
-        if (x < 0) {
-            car.x = 0;
-            car.currentSpeed = 0;
-            car.turnLeft();
-            car.turnLeft(); // Illegal! :3
-        }
-    }
-
-    // Calls the gas method for each car once
-    void gas(int amount) {
-        double gas = ((double) amount) / 100;
-        for (Car car : cars) {
-            car.gas(gas);
-        }
-    }
-
-    void brake(int amount){
-        double brake = ((double) amount / 100);
-        for (Car car : cars){
-            car.brake(brake);
-
-        }
-    }
-
-    // This is definetly the best way to do this
-    void turboOn(){
-        for (Car car : cars) {
-            if (car instanceof Saab95)
-                ((Saab95)car).setTurboOn();
-        }
-    }
-
-    void turboOff(){
-        for(Car car : cars) {
-            if (car instanceof Saab95)
-                ((Saab95) car).setTurboOff();
-        }
-    }
-
-    void liftBed(){
-        for(Car car : cars) {
-            if (car instanceof Scandia)
-                ((Scandia) car).raiseRamp();
-        }
-    }
-    void lowerBed(){
-        for(Car car : cars) {
-            if (car instanceof Scandia)
-                ((Scandia) car).lowerRamp();
+    // Sets everything in place and fits everything
+    // TODO: Take a good look and make sure you understand how these methods and components work
+    private void initComponents(String title) {
+        
+        this.setTitle(title);
+        this.setPreferredSize(new Dimension(ScreenInfo.X, ScreenInfo.Y));
+        this.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
+        
+        
+        this.add(drawPanel);
+        
+        SpinnerModel spinnerModel =
+        new SpinnerNumberModel(0, //initial value
+        0, //min
+                        100, //max
+                        1);//step
+        gasSpinner = new JSpinner(spinnerModel);
+        gasSpinner.addChangeListener(new ChangeListener() {
+            public void stateChanged(ChangeEvent e) {
+                gasAmount = (int) ((JSpinner)e.getSource()).getValue();
             }
-        }
-    void startCars(){
-        for(Car car : cars) {
-            car.startEngine();
-        }
-    }
-    void stopCars(){
-        for(Car car : cars) {
-            car.stopEngine();
-        }
-    }
-    void addCar(String make){
-        if(cars.size() < 10){
-        switch(make){
-            case "Random":
-                addRandom();
-                break;
-            case "Volvo240":
-                addVolvo();
-                break;
-            case "Saab95":
-                addSaab();
-                break;
-            case "Scania":
-                addScania();
-                break;
-            default:
-                break;
-        }}
-        arrange();
-    }
-    void removeCar(String make){
-        if (cars.size() == 0)
-            return;
+        });
 
-        if (make == "Random") {
-            Random random = new Random();
-            cars.remove(random.nextInt(cars.size()));
-        }
+        adderPanel.setLayout(new GridLayout(5, 0, 0, 8));
+        adderPanel.setCursor(new Cursor(Cursor.MOVE_CURSOR));
+        adderPanel.setBorder(new EmptyBorder(0, 10, 0, 10));
+        var addRemoveCarsLabel = new JLabel("Add/Remove cars");
+        var daFont = addRemoveCarsLabel.getFont();
+        Map<TextAttribute, Object> daAttributes = new HashMap<>(daFont.getAttributes());
+        daAttributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
+        addRemoveCarsLabel.setFont(daFont.deriveFont(daAttributes));
+        adderPanel.add(addRemoveCarsLabel, 0);
 
-        cars.remove(Character.getNumericValue(make.charAt(1)));
+        
 
-        arrange();
-    }
-    
-    void addVolvo(){
-        Car Volvo240 = new Volvo240();
-        cars.add(Volvo240);
-    }
-    void addSaab(){
-        Car Saab95 = new Saab95();
-        cars.add(Saab95);
-    }
-    void addScania() {
-        Car Scania = new Scandia();
-        cars.add(Scania);
-    }
-    void addRandom(){
-        Random random = new Random();
-        int high = random.nextInt(3);
-        switch(high){
-            case 0:
-                addVolvo();
-                break;
-            case 1:
-                addSaab();
-                break;
-            case 2:
-                addScania();
-                break;
-        }
-    }
-    
-    public void arrange() {
-        for (int i = 0; i < cars.size(); i++) {
-            cars.get(i).setY((i % 5) * 100);
-            cars.get(i).setX((i / 5) * 300);
-        }
+        var makePickerModel = new SpinnerListModel(carM.getMakes());
+        makePicker = new JSpinner(makePickerModel);
+        makePicker.addChangeListener(new ChangeListener() {
+            public void stateChanged(ChangeEvent e) {
+                makePickerData = (String) ((JSpinner)e.getSource()).getValue();
+            }
+        });
+
+        adderPanel.add(makePicker, 1);
+        adderPanel.add(addButton, 2);
+        
+        
+        carPickerModel = new SpinnerListModel(carM.getCarsWithsRandom());
+        carPicker = new JSpinner(carPickerModel);
+        carPicker.addChangeListener(new ChangeListener() {
+            public void stateChanged(ChangeEvent e) {
+                carPickerData = (String) ((JSpinner)e.getSource()).getValue();
+            }
+        });
+
+        adderPanel.add(carPicker, 3);
+        adderPanel.add(removeButton, 4);
+
+        
+        this.add(adderPanel);
+
+        gasPanel.setLayout(new BorderLayout());
+        gasPanel.add(gasLabel, BorderLayout.PAGE_START);
+        gasPanel.add(gasSpinner, BorderLayout.PAGE_END);
+        
+        this.add(gasPanel);
+        
+        controlPanel.setLayout(new GridLayout(2,4));
+        
+
+        controlPanel.add(gasButton, 0);
+        controlPanel.add(turboOnButton, 1);
+        controlPanel.add(liftBedButton, 2);
+        controlPanel.add(brakeButton, 3);
+        controlPanel.add(turboOffButton, 4);
+        controlPanel.add(lowerBedButton, 5);
+        controlPanel.setPreferredSize(new Dimension((ScreenInfo.X/2)+4, 200));
+        this.add(controlPanel);
+        controlPanel.setBackground(Color.CYAN);
+
+
+
+        JPanel startStopPanel = new JPanel();
+        startStopPanel.setLayout(new BorderLayout());
+        
+        startButton.setBackground(Color.blue);
+        startButton.setForeground(Color.green);
+        startButton.setPreferredSize(new Dimension(ScreenInfo.X/5-15,100));
+        startStopPanel.add(startButton, BorderLayout.PAGE_START);
+
+
+        stopButton.setBackground(Color.red);
+        stopButton.setForeground(Color.black);
+        stopButton.setPreferredSize(new Dimension(ScreenInfo.X/5-15,100));
+        startStopPanel.add(stopButton, BorderLayout.PAGE_END);
+
+        this.add(startStopPanel);
+
+        // This actionListener is for the gas button only
+        gasButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                carM.gas(gasAmount);
+            }
+        });
+
+        brakeButton.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent b) {
+                carM.brake(gasAmount);
+            }
+        });
+
+        turboOnButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent b) {
+                carM.turboOn();
+            }
+        });
+
+        turboOffButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent b) {
+                carM.turboOff();
+            }
+        });
+
+        liftBedButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent b) {
+                carM.liftBed();
+            }
+        });
+
+        lowerBedButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent b) {
+                carM.lowerBed();
+            }
+        });
+
+        startButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent b) {
+                carM.startCars();
+            }
+        });
+
+        stopButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent b) {
+                carM.stopCars();
+            }
+        });
+
+        addButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                carM.addCar(makePickerData);
+                update();
+            }
+        });
+
+        removeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                carM.removeCar(carPickerData);
+                update();
+            }
+        });
+
+
+
+        // Make the frame pack all it's components by respecting the sizes if possible.
+        this.pack();
+
+        // Get the computer screen resolution
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        // Center the frame
+        this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
+        // Make the frame visible
+        this.setVisible(true);
+        // Make sure the frame exits when "x" is pressed
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 }

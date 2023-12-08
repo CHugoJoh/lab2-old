@@ -4,36 +4,36 @@ import java.awt.event.ActionListener;
 import javax.swing.Timer;
 
 public class App {
-    static CarController cc;
-    static DrawPanel drawPanel;
+    static CarModel carModel;
+    static CarView carView;
     // The delay (ms) corresponds to 20 updates a sec (hz)
     private static final int delay = 50;
 
     private static class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent event){
-            cc.update();
-            drawPanel.repaint();
+            carModel.update();
+            carView.repaint();
         }
     }
 
     public static void main(String[] args) {
-        cc = new CarController();
+        carModel = new CarModel();
         
         // Instance of this class
-        cc.cars.add(new Volvo240());
+        carModel.cars.add(new Volvo240());
 
         var saab = new Saab95();
         saab.y = 100;
-        cc.cars.add(saab);
+        carModel.cars.add(saab);
 
         var scania = new Scandia();
         scania.y = 200;
-        cc.cars.add(scania);
+        carModel.cars.add(scania);
 
         // Start a new view and send a reference of self
-        drawPanel = new DrawPanel(ScreenInfo.X, ScreenInfo.Y-240, cc);
+        carView = new CarView(ScreenInfo.X, ScreenInfo.Y-240, carModel);
 
-        new CarView("CarSim 1.0", cc, drawPanel);
+        new CarController("CarSim 1.0", carModel, carView);
         
         Timer timer = new Timer(delay, new TimerListener());
         // Start the timer
